@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232b5bd7%22/%3E%3Cpath d=%22M9 17l5 5 9-12%22 stroke=%22white%22 stroke-width=%223.5%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+<title>Макеты ATV Jarvis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap">
+<style>
+/* Канвас: полотно с точечной сеткой, артборды-iframe раскладываются рядами, pan/zoom через transform */
+:root {
+  --bg: #e9ebef;
+  --dot: #c5cad3;
+  --ink: #18202c;
+  --muted: #5d6676;
+  --panel: #ffffff;
+  --line: #d6dae2;
+  --accent: #2b5bd7;
+  --sticky-orange: #ffe2bf;
+  --sticky-blue: #d9e6ff;
+  --sticky-ink: #2a2116;
+  --f-display: "Unbounded", "Golos Text", system-ui, sans-serif;
+  --f-body: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #15191f; --dot: #2c333d; --ink: #e6e9ef; --muted: #9aa3b2; --panel: #1e242d; --line: #313945; --accent: #8aa6ff;
+  color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #15191f; --dot: #2c333d; --ink: #e6e9ef; --muted: #9aa3b2; --panel: #1e242d; --line: #313945; --accent: #8aa6ff;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; overflow: hidden; background: var(--bg); color: var(--ink); font-family: var(--f-body); }
+
+#vp {
+  position: fixed; inset: 0; overflow: hidden; touch-action: none; cursor: grab;
+  background-image: radial-gradient(var(--dot) 1.2px, transparent 1.3px);
+}
+#vp.dragging { cursor: grabbing; }
+#world { position: absolute; left: 0; top: 0; transform-origin: 0 0; --z: 1; }
+
+.row-title {
+  position: absolute; margin: 0; white-space: nowrap;
+  font-family: var(--f-display); font-weight: 700; font-size: 72px; line-height: 1.1; letter-spacing: -0.01em;
+}
+.row-sub { position: absolute; margin: 0; font-size: 28px; color: var(--muted); white-space: nowrap; }
+
+.board { position: absolute; }
+.board-label {
+  position: absolute; left: 0; bottom: 100%; max-width: 100%; padding-bottom: min(calc(8px / var(--z)), 24px);
+  font-size: min(calc(14px / var(--z)), 44px); font-weight: 600; color: var(--muted); text-decoration: none;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.board-label:hover, .board-label:focus-visible { color: var(--accent); outline: none; }
+.board-frame {
+  display: block; position: relative; background: #fff; border-radius: 4px; overflow: hidden;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, .08), 0 8px 24px rgba(16, 24, 40, .10);
+  cursor: pointer;
+}
+.board-frame::after {
+  content: ""; position: absolute; inset: 0; border-radius: 4px; pointer-events: none;
+  box-shadow: inset 0 0 0 calc(3px / var(--z)) transparent; transition: box-shadow .15s;
+}
+.board:hover .board-frame::after, .board:focus-within .board-frame::after { box-shadow: inset 0 0 0 calc(3px / var(--z)) var(--accent); }
+.board iframe { display: block; border: 0; width: 100%; height: 100%; pointer-events: none; background: #fff; }
+
+.sticky {
+  position: absolute; padding: 28px 30px; border-radius: 6px; color: var(--sticky-ink);
+  font-size: 22px; line-height: 1.5; white-space: pre-wrap;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, .08), 0 6px 16px rgba(16, 24, 40, .08);
+}
+.sticky.orange { background: var(--sticky-orange); }
+.sticky.blue { background: var(--sticky-blue); }
+
+/* шапка и панель масштаба */
+.chrome {
+  position: fixed; z-index: 2; background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(16, 24, 40, .10);
+}
+.top {
+  top: max(12px, env(safe-area-inset-top, 0px)); left: max(12px, env(safe-area-inset-left, 0px));
+  max-width: calc(100vw - 24px); padding: 10px 14px; display: grid; gap: 2px;
+}
+.top a { font-size: 13px; color: var(--muted); text-decoration: none; }
+.top a:hover { color: var(--ink); }
+.top h1 { margin: 0; font-family: var(--f-display); font-weight: 500; font-size: 17px; }
+.top p { margin: 0; font-size: 13px; color: var(--muted); }
+.bar {
+  bottom: max(12px, env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 2px; padding: 4px;
+}
+.bar button {
+  font: inherit; font-size: 14px; color: var(--ink); background: transparent; border: 0; border-radius: 8px;
+  min-width: 44px; height: 44px; padding: 0 12px; cursor: pointer; white-space: nowrap;
+}
+.bar button:hover { background: var(--bg); }
+.bar button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.bar .zoom { min-width: 64px; font-variant-numeric: tabular-nums; }
+.bar .sep { width: 1px; height: 24px; background: var(--line); margin: 0 2px; }
+@media (max-width: 560px) {
+  .top p { display: none; }
+  .bar .wide { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="chrome top">
+  <a href="./">← ATV Jarvis: брифы и макеты</a>
+  <h1>Макеты ATV Jarvis</h1>
+  <p>Тяните полотно мышью или пальцем · Ctrl + колесо или щипок — масштаб · клик по макету — открыть целиком</p>
+</header>
+
+<div id="vp" aria-label="Канвас с макетами">
+  <div id="world"></div>
+</div>
+
+<nav class="chrome bar" aria-label="Масштаб">
+  <button type="button" id="zoomOut" aria-label="Уменьшить">−</button>
+  <button type="button" id="zoom100" class="zoom" aria-label="Масштаб 100 %">100 %</button>
+  <button type="button" id="zoomIn" aria-label="Увеличить">+</button>
+  <span class="sep" aria-hidden="true"></span>
+  <button type="button" id="fit">Вписать всё</button>
+  <button type="button" id="goDesktop" class="wide">Компьютер</button>
+  <button type="button" id="goPhone" class="wide">Телефон</button>
+  <button type="button" id="goEdge" class="wide">Ситуации</button>
+</nav>
+
+<script>
+(function () {
+  // Раскладка повторяет канвас из артефакта «Макеты ATV Jarvis»: ряд компьютера, ряд телефона, ряд пограничных ситуаций
+  var ROWS = [
+    {
+      id: 'desktop',
+      title: 'Приложение для компьютера',
+      sub: 'Windows или браузер',
+      boards: [
+        { file: 'Main', title: 'Главная руководителя', w: 1280, h: 900 },
+        { file: 'TaskInput', title: 'Разбор надиктованных задач', w: 1280, h: 900 },
+        { file: 'Kanban', title: 'Проект и канбан', w: 1280, h: 900 },
+        { file: 'Org', title: 'Структура компании', w: 1280, h: 900 }
+      ],
+      sticky: { color: 'orange', text: 'Исходные допущения (2026-10-27):\n- данные и обработка на VPS, приложение на компьютере и бот — клиенты;\n- своего мобильного приложения нет: на телефоне только Telegram-бот, он работает и на iPhone;\n- имена сотрудников, отделы и проекты на макетах — примеры;\n- макеты очень примерные: про смысл, не про пиксели.' }
+    },
+    {
+      id: 'phone',
+      title: 'Телефон сотрудника',
+      sub: 'Telegram-бот, Android и iPhone',
+      boards: [{ file: 'Bot', title: 'Telegram-бот', w: 390, h: 1240 }]
+    },
+    {
+      id: 'edge',
+      inline: true,
+      title: 'Пограничные ситуации',
+      sub: 'что решить до разработки',
+      boards: [{ file: 'EdgeCases', title: 'Пограничные ситуации', w: 1280, h: 1300 }],
+      sticky: { color: 'blue', text: 'Ситуации, которые надо решить до разработки. Метки: Т и В — из чьего брифа, «новое» — появилось при обсуждении.' }
+    }
+  ];
+  var GAP_X = 80, HEAD = 300, ROW_GAP = 240, GROUP_GAP = 400, STICKY_W = 440, STICKY_X = -STICKY_W - 120;
+
+  var vp = document.getElementById('vp');
+  var world = document.getElementById('world');
+  var view = { x: 0, y: 0, z: 1 };
+  var rowTop = {};
+  var bounds = { x: STICKY_X, y: 0, w: 1, h: 1 };
+  var fitted = false;
+
+  ROWS.forEach(function (row) {
+    row.titleEl = el('h2', 'row-title', row.title);
+    row.subEl = el('p', 'row-sub', row.sub);
+    world.appendChild(row.titleEl);
+    world.appendChild(row.subEl);
+    if (row.sticky) {
+      row.stickyEl = el('div', 'sticky ' + row.sticky.color, row.sticky.text);
+      row.stickyEl.style.width = STICKY_W + 'px';
+      world.appendChild(row.stickyEl);
+    }
+    row.boards.forEach(function (b) {
+      var href = 'mockups/' + b.file + '.html';
+      b.el = el('div', 'board');
+      var label = el('a', 'board-label', b.title);
+      label.href = href;
+      b.frame = el('div', 'board-frame');
+      b.frame.dataset.href = href;
+      var iframe = document.createElement('iframe');
+      iframe.src = href;
+      iframe.title = b.title;
+      iframe.tabIndex = -1;
+      iframe.setAttribute('scrolling', 'no');
+      iframe.addEventListener('load', function () { adopt(b, iframe); });
+      b.frame.appendChild(iframe);
+      b.el.appendChild(label);
+      b.el.appendChild(b.frame);
+      world.appendChild(b.el);
+    });
+  });
+  layout();
+
+  // Внутри канваса прячем ссылку «← К канвасу» и подгоняем высоту артборда под содержимое
+  function adopt(b, iframe) {
+    var doc;
+    try { doc = iframe.contentDocument; } catch (e) { return; }
+    if (!doc || !doc.documentElement) return;
+    var back = doc.querySelector('.back-link');
+    if (back) back.remove();
+    var st = doc.createElement('style');
+    st.textContent = 'html,body{overflow:hidden!important}';
+    doc.head.appendChild(st);
+    var measure = function () {
+      var h = Math.ceil(Math.max(doc.documentElement.scrollHeight, doc.body ? doc.body.scrollHeight : 0));
+      if (h > 200 && Math.abs(h - b.h) > 2) { b.h = h; layout(); }
+    };
+    measure();
+    if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(measure);
+    setTimeout(measure, 600);
+  }
+
+  function layout() {
+    // Ряд с inline: true встаёт на ту же линию справа от предыдущего
+    var y = 0, maxX = 0, lineH = 0, lineRight = 0;
+    ROWS.forEach(function (row) {
+      var x0 = 0;
+      if (row.inline) {
+        y -= lineH + ROW_GAP;
+        x0 = lineRight + GROUP_GAP + (row.stickyEl ? STICKY_W - STICKY_X - STICKY_W : 0);
+      } else {
+        lineH = 0;
+      }
+      row.x = x0;
+      rowTop[row.id] = y;
+      place(row.titleEl, x0, y);
+      place(row.subEl, x0, y + 96);
+      var x = x0, rowH = 0;
+      row.boards.forEach(function (b) {
+        place(b.el, x, y + HEAD);
+        b.frame.style.width = b.w + 'px';
+        b.frame.style.height = b.h + 'px';
+        x += b.w + GAP_X;
+        rowH = Math.max(rowH, b.h);
+      });
+      lineRight = x - GAP_X;
+      maxX = Math.max(maxX, lineRight);
+      if (row.stickyEl) {
+        place(row.stickyEl, x0 + STICKY_X, y + HEAD);
+        rowH = Math.max(rowH, row.stickyEl.offsetHeight);
+      }
+      row.height = HEAD + rowH;
+      lineH = Math.max(lineH, row.height);
+      y += lineH + ROW_GAP;
+    });
+    bounds = { x: STICKY_X, y: 0, w: maxX - STICKY_X, h: y - ROW_GAP };
+    if (!fitted) { fitted = true; fit(); }
+  }
+
+  // Камера
+  function apply() {
+    world.style.transform = 'translate(' + view.x + 'px,' + view.y + 'px) scale(' + view.z + ')';
+    world.style.setProperty('--z', view.z);
+    var g = 24 * view.z;
+    while (g < 12) g *= 2;
+    vp.style.backgroundSize = g + 'px ' + g + 'px';
+    vp.style.backgroundPosition = view.x + 'px ' + view.y + 'px';
+    document.getElementById('zoom100').textContent = Math.round(view.z * 100) + ' %';
+  }
+  function clampZ(z) { return Math.min(4, Math.max(0.03, z)); }
+  function zoomAt(z, cx, cy) {
+    z = clampZ(z);
+    view.x = cx - (cx - view.x) * (z / view.z);
+    view.y = cy - (cy - view.y) * (z / view.z);
+    view.z = z;
+    apply();
+  }
+  function zoomCenter(factor) { zoomAt(view.z * factor, innerWidth / 2, innerHeight / 2); }
+  function frameRect(r, pad) {
+    var top = document.querySelector('.top').getBoundingClientRect().bottom + 12;
+    var bottom = innerHeight - document.querySelector('.bar').getBoundingClientRect().top + 12;
+    var aw = innerWidth - pad * 2, ah = innerHeight - top - bottom - pad;
+    view.z = clampZ(Math.min(aw / r.w, ah / r.h, 1));
+    view.x = (innerWidth - r.w * view.z) / 2 - r.x * view.z;
+    view.y = top + pad / 2 + (ah - r.h * view.z) / 2 - r.y * view.z;
+    apply();
+  }
+  function fit() { frameRect(bounds, 24); }
+  function goRow(id) {
+    var row = ROWS.filter(function (r) { return r.id === id; })[0];
+    var w = row.boards.reduce(function (s, b) { return s + b.w + GAP_X; }, -GAP_X);
+    var x = row.x + (row.stickyEl ? STICKY_X : 0);
+    frameRect({ x: x, y: rowTop[id], w: row.x + w - x, h: row.height }, 24);
+  }
+
+  // Мышь, тачпад, пальцы
+  var pointers = new Map(), downAt = null, moved = false, pinch = null;
+  vp.addEventListener('pointerdown', function (e) {
+    if (e.button !== 0 && e.pointerType === 'mouse') return;
+    pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pointers.size === 1) {
+      downAt = { x: e.clientX, y: e.clientY, target: e.target };
+      moved = false;
+    } else if (pointers.size === 2) {
+      pinch = pinchState();
+      moved = true;
+    }
+    vp.setPointerCapture(e.pointerId);
+  });
+  vp.addEventListener('pointermove', function (e) {
+    var p = pointers.get(e.pointerId);
+    if (!p) return;
+    var dx = e.clientX - p.x, dy = e.clientY - p.y;
+    p.x = e.clientX; p.y = e.clientY;
+    if (pointers.size === 1) {
+      if (!moved && Math.hypot(e.clientX - downAt.x, e.clientY - downAt.y) > 5) { moved = true; vp.classList.add('dragging'); }
+      if (moved) { view.x += dx; view.y += dy; apply(); }
+    } else if (pointers.size === 2 && pinch) {
+      var now = pinchState();
+      view.x += now.cx - pinch.cx;
+      view.y += now.cy - pinch.cy;
+      zoomAt(view.z * now.d / pinch.d, now.cx, now.cy);
+      pinch = now;
+    }
+  });
+  function up(e) {
+    if (!pointers.has(e.pointerId)) return;
+    pointers.delete(e.pointerId);
+    if (pointers.size < 2) pinch = null;
+    if (pointers.size === 0) {
+      vp.classList.remove('dragging');
+      if (!moved && downAt && e.type === 'pointerup') {
+        var link = downAt.target.closest && downAt.target.closest('.board-label, .board-frame');
+        if (link) location.href = link.getAttribute('href') || link.dataset.href;
+      }
+      downAt = null;
+    }
+  }
+  vp.addEventListener('pointerup', up);
+  vp.addEventListener('pointercancel', up);
+  function pinchState() {
+    var ps = Array.from(pointers.values());
+    return { cx: (ps[0].x + ps[1].x) / 2, cy: (ps[0].y + ps[1].y) / 2, d: Math.max(1, Math.hypot(ps[0].x - ps[1].x, ps[0].y - ps[1].y)) };
+  }
+  vp.addEventListener('wheel', function (e) {
+    e.preventDefault();
+    if (e.ctrlKey || e.metaKey) {
+      zoomAt(view.z * Math.exp(-e.deltaY * 0.01), e.clientX, e.clientY);
+    } else {
+      var k = e.deltaMode === 1 ? 16 : 1;
+      view.x -= e.deltaX * k; view.y -= e.deltaY * k;
+      if (e.shiftKey && !e.deltaX) { view.y += e.deltaY * k; view.x -= e.deltaY * k; }
+      apply();
+    }
+  }, { passive: false });
+  // Ссылки-подписи обрабатываем сами, чтобы перетаскивание за подпись не открывало макет
+  world.addEventListener('click', function (e) {
+    if (e.target.closest('.board-label') && e.detail > 0) e.preventDefault();
+  });
+
+  document.getElementById('zoomIn').onclick = function () { zoomCenter(1.25); };
+  document.getElementById('zoomOut').onclick = function () { zoomCenter(0.8); };
+  document.getElementById('zoom100').onclick = function () { zoomAt(1, innerWidth / 2, innerHeight / 2); };
+  document.getElementById('fit').onclick = fit;
+  document.getElementById('goDesktop').onclick = function () { goRow('desktop'); };
+  document.getElementById('goPhone').onclick = function () { goRow('phone'); };
+  document.getElementById('goEdge').onclick = function () { goRow('edge'); };
+  document.addEventListener('keydown', function (e) {
+    if (e.ctrlKey || e.metaKey || e.altKey || /input|textarea/i.test(e.target.tagName)) return;
+    if (e.key === '0') fit();
+    else if (e.key === '1') zoomAt(1, innerWidth / 2, innerHeight / 2);
+    else if (e.key === '+' || e.key === '=') zoomCenter(1.25);
+    else if (e.key === '-') zoomCenter(0.8);
+  });
+  addEventListener('resize', apply);
+
+  function el(tag, cls, text) {
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (text) n.textContent = text;
+    return n;
+  }
+  function place(n, x, y) { n.style.left = x + 'px'; n.style.top = y + 'px'; }
+})();
+</script>
+</body>
+</html>

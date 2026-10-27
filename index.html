@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232b5bd7%22/%3E%3Cpath d=%22M9 17l5 5 9-12%22 stroke=%22white%22 stroke-width=%223.5%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+<title>ATV Jarvis · брифы и макеты</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;700&display=swap">
+<style>
+:root {
+  --bg: #f5f6f8; --surface: #ffffff; --ink: #18202c; --muted: #5d6676; --line: #dde1e8;
+  --tim: #2f56c9; --tim-soft: #e8edfb; --vas: #0d7f62; --vas-soft: #e2f3ed; --dot: #c5cad3;
+  --f-display: "Unbounded", "Golos Text", system-ui, sans-serif;
+  --f-body: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11151c; --surface: #19202a; --ink: #e6e9ef; --muted: #9aa3b2; --line: #2b3441;
+  --tim: #8aa6ff; --tim-soft: #1e2a4a; --vas: #5fd0ad; --vas-soft: #15332b; --dot: #2c333d; color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #11151c; --surface: #19202a; --ink: #e6e9ef; --muted: #9aa3b2; --line: #2b3441;
+  --tim: #8aa6ff; --tim-soft: #1e2a4a; --vas: #5fd0ad; --vas-soft: #15332b; --dot: #2c333d; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 var(--f-body);
+  padding: 56px max(16px, env(safe-area-inset-left, 0px)) 64px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: grid; gap: 40px; }
+header { display: grid; gap: 14px; }
+.eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; color: var(--muted); }
+h1 { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.1; letter-spacing: -0.01em; text-wrap: balance; }
+.lead { margin: 0; max-width: 62ch; color: var(--muted); font-size: 1.08rem; }
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.card {
+  display: grid; grid-template-rows: auto 1fr; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 18px; overflow: hidden; color: inherit; text-decoration: none; transition: border-color .15s, transform .15s;
+}
+.card:hover { border-color: var(--muted); transform: translateY(-2px); }
+.card:focus-visible { outline: 2px solid var(--tim); outline-offset: 3px; }
+.card .body { padding: 22px 24px 26px; display: grid; gap: 8px; align-content: start; }
+.card h2 { margin: 0; font-family: var(--f-display); font-weight: 500; font-size: 1.4rem; }
+.card p { margin: 0; color: var(--muted); }
+.card .go { font-weight: 600; color: var(--tim); margin-top: 6px; }
+
+/* превью-иллюстрации из CSS */
+.pv { height: 190px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+.pv-briefs { background: var(--bg); display: grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 28px 28px 0; }
+.pv-briefs div { background: var(--surface); border-radius: 10px 10px 0 0; border: 1px solid var(--line); border-bottom: 0; padding: 14px; display: grid; gap: 8px; align-content: start; }
+.pv-briefs div:first-child { border-top: 4px solid var(--tim); }
+.pv-briefs div:last-child { border-top: 4px solid var(--vas); }
+.pv-briefs i { display: block; height: 8px; border-radius: 4px; background: var(--line); }
+.pv-briefs b { display: block; height: 12px; width: 60%; border-radius: 4px; }
+.pv-briefs div:first-child b { background: var(--tim-soft); }
+.pv-briefs div:last-child b { background: var(--vas-soft); }
+.pv-canvas { background-color: var(--bg); background-image: radial-gradient(var(--dot) 1px, transparent 1.2px); background-size: 12px 12px; }
+.pv-canvas span { position: absolute; background: var(--surface); border-radius: 3px; box-shadow: 0 1px 2px rgba(16,24,40,.08), 0 4px 10px rgba(16,24,40,.08); }
+.pv-canvas span::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 22%; background: var(--tim-soft); border-radius: 3px 0 0 3px; }
+.pv-canvas span.ph::before { display: none; }
+.pv-canvas span.ph { background: #dce3ea; }
+.pv-canvas em { position: absolute; width: 56px; height: 46px; border-radius: 3px; background: #ffe2bf; }
+
+footer { color: var(--muted); font-size: 0.88rem; max-width: 70ch; }
+@media (max-width: 720px) {
+  body { padding-top: 32px; }
+  .cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">ATV Group · система постановки задач</div>
+    <h1>ATV Jarvis: брифы и макеты</h1>
+    <p class="lead">Руководитель ставит задачи текстом или голосом, сотрудники получают их и отчитываются через Telegram. Здесь собрано, что хотят директора, и первые очень примерные макеты интерфейса.</p>
+  </header>
+
+  <div class="cards">
+    <a class="card" href="briefs.html">
+      <div class="pv pv-briefs" aria-hidden="true">
+        <div><b></b><i></i><i></i><i style="width:70%"></i><i></i></div>
+        <div><b></b><i></i><i style="width:80%"></i><i></i><i></i></div>
+      </div>
+      <div class="body">
+        <h2>Брифы Тимофея и Василия</h2>
+        <p>Что хочет каждый директор, где их брифы расходятся и совпадают, и список открытых вопросов.</p>
+        <span class="go">Читать →</span>
+      </div>
+    </a>
+    <a class="card" href="canvas.html">
+      <div class="pv pv-canvas" aria-hidden="true">
+        <em style="left:18px;top:30px"></em>
+        <span style="left:86px;top:30px;width:80px;height:56px"></span>
+        <span style="left:176px;top:30px;width:80px;height:56px"></span>
+        <span style="left:266px;top:30px;width:80px;height:56px"></span>
+        <span style="left:356px;top:30px;width:80px;height:56px"></span>
+        <span class="ph" style="left:86px;top:104px;width:26px;height:58px"></span>
+        <em style="left:18px;top:176px"></em>
+        <span style="left:86px;top:176px;width:80px;height:70px"></span>
+      </div>
+      <div class="body">
+        <h2>Макеты интерфейса</h2>
+        <p>Один большой лист: приложение для компьютера, Telegram-бот на телефоне и пограничные ситуации. Можно двигать, приближать и открывать каждый макет.</p>
+        <span class="go">Открыть канвас →</span>
+      </div>
+    </a>
+  </div>
+
+  <footer>Материалы от 2026-10-27, рабочие. Имена сотрудников, отделы и проекты на макетах — примеры. Макеты про смысл, а не про пиксели.</footer>
+</div>
+</body>
+</html>

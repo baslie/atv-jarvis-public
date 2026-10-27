@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232b5bd7%22/%3E%3Cpath d=%22M9 17l5 5 9-12%22 stroke=%22white%22 stroke-width=%223.5%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+<title>Проект и канбан</title>
+</head>
+<body>
+<a href="../canvas.html" class="back-link" style="display:block;padding:8px 16px;font:14px system-ui,sans-serif;color:#2B5BD7;background:#FFFFFF;border-bottom:1px solid #DDE1E7;text-decoration:none">← К канвасу</a>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;font-family:"Golos Text",system-ui,sans-serif;color:#161B22;background:#F3F4F6}
+a{color:#2B5BD7}a:hover{color:#1D44A8}
+button{font-family:inherit}
+</style>
+<div style="min-height: 900px; box-sizing: border-box; padding: 28px 32px; background: #F3F4F6; font-family: 'Golos Text', system-ui, sans-serif; color: #161B22; display: flex; flex-direction: column; gap: 18px;">
+  <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 12px;">
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <a href="Main.html" style="font-size: 14px; text-decoration: none;">← Проекты</a>
+      <h1 style="margin: 0; font-size: 24px;">Объект на Ленина</h1>
+      <span style="font-size: 14px; color: #5A6372;">Ответственный: Ирина Смирнова · 4 участника · 11 задач</span>
+    </div>
+    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+      <div role="group" aria-label="Колонки" style="display: flex; background: #E4E7EC; border-radius: 10px; padding: 3px;">
+        <button type="button" aria-pressed="true" style="border: 0; background: #FFFFFF; border-radius: 8px; padding: 8px 14px; font-size: 14px; font-weight: 600;">По статусу</button>
+        <button type="button" aria-pressed="false" style="border: 0; background: transparent; border-radius: 8px; padding: 8px 14px; font-size: 14px;">По источнику (как у Тимофея)</button>
+        <button type="button" aria-pressed="false" style="border: 0; background: transparent; border-radius: 8px; padding: 8px 14px; font-size: 14px;">По людям</button>
+      </div>
+      <button type="button" style="border: 0; background: #2B5BD7; color: #FFFFFF; border-radius: 10px; padding: 10px 16px; font-size: 14px; font-weight: 600;">+ Задача в проект</button>
+    </div>
+  </div>
+
+  <div style="overflow-x: auto;">
+    <div style="display: grid; grid-template-columns: repeat(4, minmax(240px, 1fr)); gap: 14px; min-width: 1000px;">
+
+      <section style="background: #E9ECF1; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+        <h2 style="margin: 0; font-size: 14px; display: flex; justify-content: space-between;">Новые <span style="color: #5A6372; font-weight: 400;">2</span></h2>
+        <div style="background: #FFF6CC; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 14px;">
+          <span style="font-size: 12px; color: #5C3D00;">Автор: Мария Кузнецова → руководителю</span>
+          <b>Согласовать бюджет на рекламу</b>
+          <span style="font-size: 12px; color: #5C3D00;">ждёт одобрения · 2-й рабочий день из 3</span>
+        </div>
+        <div style="background: #FFFFFF; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 14px;">
+          <span style="font-size: 11px; font-weight: 700; color: #C62828; text-transform: uppercase; letter-spacing: 0.04em;">Задача от руководителя</span>
+          <b>Запросить КП у трёх подрядчиков</b>
+          <span style="font-size: 13px; color: #5A6372;">Олег В. · без срока</span>
+        </div>
+      </section>
+
+      <section style="background: #E9ECF1; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+        <h2 style="margin: 0; font-size: 14px; display: flex; justify-content: space-between;">В работе <span style="color: #5A6372; font-weight: 400;">5</span></h2>
+        <div style="background: #FFFFFF; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 14px;">
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;"><span style="font-size: 11px; font-weight: 700; color: #C62828; text-transform: uppercase; letter-spacing: 0.04em;">Приоритетная</span><span style="font-size: 11px; font-weight: 700; color: #C62828; text-transform: uppercase; letter-spacing: 0.04em;">· от руководителя</span></div>
+          <b>Подготовить смету</b>
+          <span style="font-size: 13px; color: #5A6372;">Ирина С. · пт 30.10, 15:00</span>
+        </div>
+        <div style="background: #FFFFFF; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 14px;">
+          <span style="font-size: 11px; font-weight: 700; color: #C62828; text-transform: uppercase; letter-spacing: 0.04em;">Задача от руководителя</span>
+          <b>Проверить договор с подрядчиком</b>
+          <span style="font-size: 13px;"><span style="color: #FFFFFF; background: #C62828; border-radius: 4px; padding: 1px 6px; font-size: 12px; font-weight: 600;">Просрочено</span> <span style="color: #5A6372;">Александр К. · 26.10</span></span>
+        </div>
+        <div style="background: #FFF6CC; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 14px;">
+          <span style="font-size: 12px; color: #5C3D00;">Себе · Ирина С.</span>
+          <b>Съездить на объект, сфотографировать фасад</b>
+          <span style="font-size: 13px; color: #5C3D00;">чт 29.10</span>
+        </div>
+        <div style="background: #FFF6CC; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 14px;">
+          <span style="font-size: 12px; color: #5C3D00;">От коллеги: Ирина С. → Мария К.</span>
+          <b>Собрать цены на окна</b>
+          <span style="font-size: 13px; color: #5C3D00;">без срока</span>
+        </div>
+        <div style="background: #FFFFFF; border: 1px dashed #B9C0CC; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #5A6372;">
+          <span style="font-size: 12px;">Отложена до 04.11 · Алексей П. в отпуске</span>
+          <b style="color: #161B22;">Обновить макет буклета</b>
+        </div>
+      </section>
+
+      <section style="background: #E9ECF1; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+        <h2 style="margin: 0; font-size: 14px; display: flex; justify-content: space-between;">Ждёт проверки <span style="color: #5A6372; font-weight: 400;">2</span></h2>
+        <div style="background: #FFFFFF; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 14px;">
+          <span style="font-size: 11px; font-weight: 700; color: #C62828; text-transform: uppercase; letter-spacing: 0.04em;">Задача от руководителя</span>
+          <b>Замеры помещения</b>
+          <span style="font-size: 13px; color: #5A6372;">Ирина С. · отчёт со скриншотом</span>
+          <a href="Main.html" style="font-size: 13px;">Проверить отчёт</a>
+        </div>
+        <div style="background: #FFFFFF; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 14px;">
+          <span style="font-size: 11px; font-weight: 700; color: #C62828; text-transform: uppercase; letter-spacing: 0.04em;">Одобрено руководителем</span>
+          <b>План работ на ноябрь</b>
+          <span style="font-size: 13px; color: #5A6372;">Мария К. · текстовый отчёт</span>
+        </div>
+      </section>
+
+      <section style="background: #E9ECF1; border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+        <h2 style="margin: 0; font-size: 14px; display: flex; justify-content: space-between;">Выполнено <span style="color: #5A6372; font-weight: 400;">2</span></h2>
+        <div style="background: #FFFFFF; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #5A6372;">
+          <b style="color: #161B22;">Подписать акт осмотра</b>
+          <span style="font-size: 13px;">принято 26.10 · хранится до 25.11</span>
+        </div>
+        <div style="background: #FFFFFF; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; color: #5A6372;">
+          <b style="color: #161B22;">Собрать исходные документы</b>
+          <span style="font-size: 13px;">принято 23.10</span>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; color: #5A6372;">
+    <span>Перетаскивать в «Выполнено» может только руководитель: у Василия выполнение принимает он.</span>
+    <span>Задачи без проекта живут в карточке человека, проект — дополнительная группировка.</span>
+  </div>
+</div>
+</body>
+</html>

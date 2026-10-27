@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232b5bd7%22/%3E%3Cpath d=%22M9 17l5 5 9-12%22 stroke=%22white%22 stroke-width=%223.5%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+<title>Разбор надиктованных задач</title>
+</head>
+<body>
+<a href="../canvas.html" class="back-link" style="display:block;padding:8px 16px;font:14px system-ui,sans-serif;color:#2B5BD7;background:#FFFFFF;border-bottom:1px solid #DDE1E7;text-decoration:none">← К канвасу</a>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500&amp;display=swap">
+<style>
+body{margin:0;font-family:"Golos Text",system-ui,sans-serif;color:#161B22;background:#F3F4F6}
+a{color:#2B5BD7}a:hover{color:#1D44A8}
+button,select,input{font-family:inherit}
+</style>
+<div style="min-height: 900px; box-sizing: border-box; padding: 28px 32px; background: #F3F4F6; font-family: 'Golos Text', system-ui, sans-serif; color: #161B22; display: flex; flex-direction: column; gap: 20px;">
+  <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <a href="Main.html" style="font-size: 14px; text-decoration: none;">← Главная</a>
+      <h1 style="margin: 0; font-size: 24px;">Проверьте, что я понял</h1>
+    </div>
+    <div style="display: flex; gap: 10px;">
+      <button type="button" style="border: 1px solid #DDE1E7; background: #FFFFFF; border-radius: 10px; padding: 10px 16px; font-size: 14px;">Отмена</button>
+      <button type="button" style="border: 0; background: #2B5BD7; color: #FFFFFF; border-radius: 10px; padding: 10px 18px; font-size: 14px; font-weight: 600;">Создать 2 задачи из 3</button>
+    </div>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start;">
+    <section aria-label="Исходник" style="flex: 1 1 320px; min-width: 0; background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 14px;">
+      <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: #5A6372; font-weight: 600;">Голосовое · 0:42</span>
+      <div aria-hidden="true" style="display: flex; align-items: center; gap: 3px; height: 40px;">
+        <span style="width: 4px; height: 12px; background: #2B5BD7; border-radius: 2px;"></span><span style="width: 4px; height: 26px; background: #2B5BD7; border-radius: 2px;"></span><span style="width: 4px; height: 34px; background: #2B5BD7; border-radius: 2px;"></span><span style="width: 4px; height: 18px; background: #2B5BD7; border-radius: 2px;"></span><span style="width: 4px; height: 30px; background: #2B5BD7; border-radius: 2px;"></span><span style="width: 4px; height: 10px; background: #2B5BD7; border-radius: 2px;"></span><span style="width: 4px; height: 24px; background: #2B5BD7; border-radius: 2px;"></span><span style="width: 4px; height: 36px; background: #2B5BD7; border-radius: 2px;"></span><span style="width: 4px; height: 20px; background: #2B5BD7; border-radius: 2px;"></span><span style="width: 4px; height: 14px; background: #B9C6EE; border-radius: 2px;"></span><span style="width: 4px; height: 28px; background: #B9C6EE; border-radius: 2px;"></span><span style="width: 4px; height: 16px; background: #B9C6EE; border-radius: 2px;"></span><span style="width: 4px; height: 32px; background: #B9C6EE; border-radius: 2px;"></span><span style="width: 4px; height: 12px; background: #B9C6EE; border-radius: 2px;"></span><span style="width: 4px; height: 22px; background: #B9C6EE; border-radius: 2px;"></span><span style="width: 4px; height: 8px; background: #B9C6EE; border-radius: 2px;"></span>
+      </div>
+      <p style="margin: 0; font-size: 15px; line-height: 1.6;">«Так, <mark style="background: #E8EEFC; color: inherit;">Ирине</mark> — подготовить смету по объекту на Ленина <mark style="background: #E8EEFC; color: inherit;">к пятнице, к трём часам</mark>. <mark style="background: #FDECEC; color: inherit;">Саше</mark> — проверить договор с подрядчиком <mark style="background: #FDECEC; color: inherit;">до конца недели</mark>. И <mark style="background: #FFF6CC; color: inherit;">Алексею</mark> обновить макет буклета, срочно, <mark style="background: #E8EEFC; color: inherit;">к среде</mark>.»</p>
+      <p style="margin: 0; font-size: 13px; color: #5A6372;">Синим — понял уверенно. Красным — нужно уточнение. Жёлтым — есть препятствие.</p>
+    </section>
+
+    <div style="flex: 2 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 14px;">
+
+      <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;"><b style="font-size: 15px;">Задача 1</b><span style="font-size: 13px; color: #1E7A4F; font-weight: 600;">готова</span></div>
+        <label for="t1" style="font-size: 12px; color: #5A6372;">Текст</label>
+        <input id="t1" value="Подготовить смету по объекту на Ленина" style="border: 1px solid #DDE1E7; border-radius: 8px; padding: 10px; font-size: 15px;">
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; font-size: 14px;">
+          <div style="display: flex; flex-direction: column; gap: 4px;"><label for="a1" style="font-size: 12px; color: #5A6372;">Исполнитель</label><select id="a1" style="border: 1px solid #DDE1E7; border-radius: 8px; padding: 8px; font-size: 14px;"><option>Ирина Смирнова</option></select></div>
+          <div style="display: flex; flex-direction: column; gap: 4px;"><label for="d1" style="font-size: 12px; color: #5A6372;">Срок</label><input id="d1" value="пт 30.10 · 15:00" style="border: 1px solid #DDE1E7; border-radius: 8px; padding: 8px; font-size: 14px;"></div>
+          <div style="display: flex; flex-direction: column; gap: 4px;"><label for="p1" style="font-size: 12px; color: #5A6372;">Проект</label><select id="p1" style="border: 1px solid #DDE1E7; border-radius: 8px; padding: 8px; font-size: 14px;"><option>Объект на Ленина</option></select></div>
+          <div style="display: flex; flex-direction: column; gap: 4px;"><label for="c1" style="font-size: 12px; color: #5A6372;">Куда отправить</label><select id="c1" style="border: 1px solid #DDE1E7; border-radius: 8px; padding: 8px; font-size: 14px;"><option>Лично в бот</option><option>Чат проекта</option></select></div>
+        </div>
+      </article>
+
+      <article style="background: #FFFFFF; border: 2px solid #C62828; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;"><b style="font-size: 15px;">Задача 2 · «Проверить договор с подрядчиком»</b><span style="font-size: 13px; color: #C62828; font-weight: 600;">2 уточнения</span></div>
+        <fieldset style="border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+          <legend style="font-size: 14px; padding: 0 0 8px;">«Саша» — подходят двое. Кому?</legend>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <label style="display: flex; gap: 6px; align-items: center; border: 1px solid #DDE1E7; border-radius: 8px; padding: 8px 12px; font-size: 14px;"><input type="radio" name="who2" checked>Александр Ким, юрист</label>
+            <label style="display: flex; gap: 6px; align-items: center; border: 1px solid #DDE1E7; border-radius: 8px; padding: 8px 12px; font-size: 14px;"><input type="radio" name="who2">Александра Орлова, бухгалтер</label>
+          </div>
+        </fieldset>
+        <fieldset style="border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+          <legend style="font-size: 14px; padding: 0 0 8px;">«До конца недели» — какая дата?</legend>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <label style="display: flex; gap: 6px; align-items: center; border: 1px solid #DDE1E7; border-radius: 8px; padding: 8px 12px; font-size: 14px;"><input type="radio" name="d2">пт 30.10</label>
+            <label style="display: flex; gap: 6px; align-items: center; border: 1px solid #DDE1E7; border-radius: 8px; padding: 8px 12px; font-size: 14px;"><input type="radio" name="d2">сб 31.10</label>
+            <label style="display: flex; gap: 6px; align-items: center; border: 1px solid #DDE1E7; border-radius: 8px; padding: 8px 12px; font-size: 14px;"><input type="radio" name="d2">другая дата</label>
+          </div>
+        </fieldset>
+      </article>
+
+      <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;"><b style="font-size: 15px;">Задача 3 · «Обновить макет буклета»</b><span style="font-size: 12px; font-weight: 700; color: #C62828; text-transform: uppercase; letter-spacing: 0.04em;">Приоритетная</span></div>
+        <div style="background: #FFF6CC; color: #5C3D00; border-radius: 10px; padding: 12px; font-size: 14px; display: flex; flex-direction: column; gap: 8px;">
+          <span>Алексей Петров в отпуске до вт 03.11. Срок «к среде» — это 28.10, раньше его выхода.</span>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button type="button" style="border: 1px solid #D9C27A; background: #FFFFFF; border-radius: 8px; padding: 6px 12px; font-size: 13px;">Отложить, срок ср 04.11</button>
+            <button type="button" style="border: 1px solid #D9C27A; background: #FFFFFF; border-radius: 8px; padding: 6px 12px; font-size: 13px;">Поручить другому</button>
+            <button type="button" style="border: 1px solid #D9C27A; background: #FFFFFF; border-radius: 8px; padding: 6px 12px; font-size: 13px;">Не создавать</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</div>
+</body>
+</html>

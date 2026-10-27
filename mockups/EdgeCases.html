@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232b5bd7%22/%3E%3Cpath d=%22M9 17l5 5 9-12%22 stroke=%22white%22 stroke-width=%223.5%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+<title>Пограничные ситуации</title>
+</head>
+<body>
+<a href="../canvas.html" class="back-link" style="display:block;padding:8px 16px;font:14px system-ui,sans-serif;color:#2B5BD7;background:#FFFFFF;border-bottom:1px solid #DDE1E7;text-decoration:none">← К канвасу</a>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@600&amp;display=swap">
+<style>
+body{margin:0;font-family:"Golos Text",system-ui,sans-serif;color:#161B22;background:#F3F4F6}
+</style>
+<div style="min-height: 1300px; box-sizing: border-box; padding: 32px; background: #F3F4F6; font-family: 'Golos Text', system-ui, sans-serif; color: #161B22; display: flex; flex-direction: column; gap: 22px;">
+  <div style="display: flex; flex-direction: column; gap: 6px; max-width: 760px;">
+    <h1 style="margin: 0; font-size: 26px;">Пограничные ситуации</h1>
+    <p style="margin: 0; font-size: 15px; color: #5A6372;">Что может пойти не так и как интерфейс себя ведёт. Предложения — черновик для обсуждения. Метка показывает источник: Т — бриф Тимофея, В — бриф Василия, «новое» — появилось сейчас.</p>
+  </div>
+
+  <h2 style="margin: 8px 0 0; font-size: 18px;">Постановка: голос и текст</h2>
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;">
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">Т · В</span>
+      <b style="font-size: 15px;">Несколько задач в одном голосовом</b>
+      <span style="color: #5A6372;">Разделить на отдельные карточки, каждую подтвердить или поправить отдельно. Готовые можно создать, не дожидаясь спорных.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">В</span>
+      <b style="font-size: 15px;">«К концу недели», «на днях»</b>
+      <span style="color: #5A6372;">Не сохранять, пока нет точной даты. Предложить 2–3 варианта кнопками и календарь. Время необязательно <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6B4FB8;">Q-007</span>.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">новое</span>
+      <b style="font-size: 15px;">«Саше», а Саш двое</b>
+      <span style="color: #5A6372;">Показать обоих с должностями, не угадывать. Запоминать, кого руководитель обычно имеет в виду, и предлагать первым.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">новое</span>
+      <b style="font-size: 15px;">Исполнитель не назван</b>
+      <span style="color: #5A6372;">По умолчанию — «Мои задачи» того, кто говорил, с пометкой «кому?», чтобы легко переназначить.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">новое</span>
+      <b style="font-size: 15px;">Шум, плохое распознавание</b>
+      <span style="color: #5A6372;">Всегда показывать текст и давать править. Аудио хранить рядом с задачей, пока она не подтверждена.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">Т · В</span>
+      <b style="font-size: 15px;">Кто говорит голосом</b>
+      <span style="color: #5A6372;">У Василия только руководитель, у Тимофея не ограничено. Можно сделать настройкой на роль <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6B4FB8;">Q-012</span>.</span>
+    </article>
+  </div>
+
+  <h2 style="margin: 8px 0 0; font-size: 18px;">Люди и иерархия</h2>
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;">
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">новое</span>
+      <b style="font-size: 15px;">Два директора ставят одному человеку</b>
+      <span style="color: #5A6372;">Сроки конфликтуют, оба «приоритетные». Кто решает? Нужно правило или хотя бы предупреждение «у Ирины уже 3 приоритетные на пятницу» <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6B4FB8;">Q-006</span>.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">новое</span>
+      <b style="font-size: 15px;">Промежуточный руководитель</b>
+      <span style="color: #5A6372;">Ирина руководит Марией, но подчиняется Василию. Кто принимает работу Марии: Ирина, Василий или оба? В брифах уровней только два.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">новое</span>
+      <b style="font-size: 15px;">Человек в двух отделах или проектах</b>
+      <span style="color: #5A6372;">Один руководитель «по штату» и несколько проектов. Задача может быть в проекте, а может и без проекта.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">В</span>
+      <b style="font-size: 15px;">Задача отсутствующему</b>
+      <span style="color: #5A6372;">Предупредить автора, задачу отложить до выхода. Если срок раньше выхода, попросить другую дату или исполнителя.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">В</span>
+      <b style="font-size: 15px;">Увольнение и замена</b>
+      <span style="color: #5A6372;">Не дать архивировать, пока остаются текущие задачи. Новичку на ту же должность — его задачи и архив выполненных по кнопке.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">Т</span>
+      <b style="font-size: 15px;">Задача в общий чат проекта</b>
+      <span style="color: #5A6372;">Тимофей выбирает чат для публикации. Кто тогда исполнитель, если в чате 10 человек? Видят ли все чужие задачи? <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6B4FB8;">Q-010</span></span>
+    </article>
+  </div>
+
+  <h2 style="margin: 8px 0 0; font-size: 18px;">Устройства, связь, сервер</h2>
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px;">
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">новое</span>
+      <b style="font-size: 15px;">У сотрудника iPhone</b>
+      <span style="color: #5A6372;">Своего мобильного приложения нет, на телефоне всё через бота. Если боту не хватит, можно сделать веб-версию, она откроется и на iPhone.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">новое</span>
+      <b style="font-size: 15px;">Telegram недоступен или заблокирован</b>
+      <span style="color: #5A6372;">Бот — единственный канал для сотрудника. Запасной путь: веб-версия или дублирование напоминаний на почту?</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">новое · вместо ноутбука В</span>
+      <b style="font-size: 15px;">Данные на VPS, а не на ноутбуке</b>
+      <span style="color: #5A6372;">Бот работает всегда, и пункт Василия «бот живёт, пока включён ноутбук» отпадает. Зато нужны вход в приложение, резервные копии сервера и решение, где обрабатывать голос <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6B4FB8;">Q-002</span> <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6B4FB8;">Q-003</span>.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">Т · В</span>
+      <b style="font-size: 15px;">Два вида напоминаний сразу</b>
+      <span style="color: #5A6372;">По сроку (за 24 ч … 10 мин) и по расписанию (10/14/18). Вместе это до 7 сообщений в день на задачу. Нужен лимит или объединение <span style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #6B4FB8;">Q-008</span>.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">В</span>
+      <b style="font-size: 15px;">Разные часовые пояса</b>
+      <span style="color: #5A6372;">Руководитель в Томске ставит «до 15:00». Это 15:00 по чьему времени? Показывать срок во времени исполнителя с подсказкой.</span>
+    </article>
+    <article style="background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 14px;">
+      <span style="font-size: 12px; font-weight: 600; color: #5A6372;">В</span>
+      <b style="font-size: 15px;">Скриншот отчёта по нескольким задачам</b>
+      <span style="color: #5A6372;">Сопоставить автоматически. Если не уверен — дать выбрать задачу. Не выбрано ничего — создать новую.</span>
+    </article>
+  </div>
+</div>
+</body>
+</html>

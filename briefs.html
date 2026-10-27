@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232b5bd7%22/%3E%3Cpath d=%22M9 17l5 5 9-12%22 stroke=%22white%22 stroke-width=%223.5%22 fill=%22none%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3C/svg%3E">
+<title>Брифы Тимофея и Василия · ATV Jarvis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@500;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: узкая колонка чтения + места «бок о бок», где два директора сравниваются; у каждого свой цвет-метка */
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --ink: #18202c;
+  --muted: #5d6676;
+  --line: #dde1e8;
+  --tim: #2f56c9;      /* Тимофей */
+  --tim-soft: #e8edfb;
+  --vas: #0d7f62;      /* Василий */
+  --vas-soft: #e2f3ed;
+  --red: #c62828;
+  --red-soft: #fdecec;
+  --pale-yellow: #fff8d6;
+  --yellow: #ffe17a;
+  --q: #6b4fb8;
+  --q-soft: #efeafb;
+  --code-bg: #eef1f5;
+  --f-display: "Unbounded", "Golos Text", system-ui, sans-serif;
+  --f-body: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11151c; --surface: #19202a; --ink: #e6e9ef; --muted: #9aa3b2; --line: #2b3441;
+  --tim: #8aa6ff; --tim-soft: #1e2a4a; --vas: #5fd0ad; --vas-soft: #15332b;
+  --red: #ff7b72; --red-soft: #3a1d1f; --pale-yellow: #3a3418; --yellow: #6b5a14;
+  --q: #b9a3ff; --q-soft: #2a2343; --code-bg: #0e1218; color-scheme: dark;
+} }
+:root[data-theme="dark"] {
+  --bg: #11151c; --surface: #19202a; --ink: #e6e9ef; --muted: #9aa3b2; --line: #2b3441;
+  --tim: #8aa6ff; --tim-soft: #1e2a4a; --vas: #5fd0ad; --vas-soft: #15332b;
+  --red: #ff7b72; --red-soft: #3a1d1f; --pale-yellow: #3a3418; --yellow: #6b5a14;
+  --q: #b9a3ff; --q-soft: #2a2343; --code-bg: #0e1218; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 16px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 32px 64px;
+}
+.wrap { max-width: 1040px; margin: 0 auto; display: grid; gap: 56px; }
+h1, h2, h3 { text-wrap: balance; margin: 0; }
+h1 { font-family: var(--f-display); font-weight: 700; font-size: clamp(1.7rem, 4vw, 2.6rem); line-height: 1.15; letter-spacing: -0.01em; }
+h2 { font-family: var(--f-display); font-weight: 500; font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.25; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+ul { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.eyebrow { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; color: var(--muted); }
+.lead { color: var(--muted); max-width: 65ch; font-size: 1.05rem; }
+section { display: grid; gap: 20px; scroll-margin-top: 16px; }
+.sec-head { display: grid; gap: 6px; }
+a { color: inherit; }
+a:focus-visible, summary:focus-visible { outline: 2px solid var(--tim); outline-offset: 3px; border-radius: 4px; }
+
+/* шапка */
+header { display: grid; gap: 18px; }
+nav { display: flex; flex-wrap: wrap; gap: 8px; }
+nav a { text-decoration: none; font-size: 0.88rem; padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
+nav a:hover { border-color: var(--muted); }
+
+.who { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; }
+.dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+.dot.tim { background: var(--tim); } .dot.vas { background: var(--vas); }
+
+/* портреты */
+.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.duo > * { min-width: 0; }
+.portrait { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 14px; align-content: start; border-top: 4px solid var(--c); }
+.portrait.tim { --c: var(--tim); } .portrait.vas { --c: var(--vas); }
+.portrait .name { font-family: var(--f-display); font-weight: 500; font-size: 1.25rem; color: var(--c); }
+.portrait .gist { font-size: 1.05rem; font-weight: 500; }
+.meta { font-size: 0.85rem; color: var(--muted); }
+
+/* Тимофей */
+.flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px; }
+.step { flex: 1 1 150px; background: var(--tim-soft); border-radius: 10px; padding: 12px 14px; display: grid; gap: 4px; }
+.step b { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--tim); }
+.arrow { align-self: center; color: var(--muted); font-size: 1.2rem; }
+
+.kanban { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.kanban > div { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.kanban h4 { margin: 0; font-size: 0.88rem; }
+.kcard { background: var(--bg); border-radius: 6px; padding: 8px 10px; font-size: 0.82rem; color: var(--muted); }
+
+.timeline { position: relative; padding: 28px 0 8px; }
+.timeline .bar { height: 4px; background: linear-gradient(90deg, var(--tim-soft), var(--tim)); border-radius: 2px; }
+.timeline .ticks { display: flex; justify-content: space-between; margin-top: -12px; }
+.tick { display: grid; justify-items: center; gap: 6px; font-variant-numeric: tabular-nums; font-size: 0.85rem; }
+.tick i { width: 16px; height: 16px; border-radius: 50%; background: var(--surface); border: 3px solid var(--tim); }
+.tick.end i { border-color: var(--red); background: var(--red); }
+.tick.end { color: var(--red); font-weight: 600; }
+
+.tg { background: var(--code-bg); border-radius: 14px 14px 14px 4px; padding: 16px 18px; font-family: var(--f-mono); font-size: 0.85rem; line-height: 1.55; white-space: pre; overflow-x: auto; max-width: 440px; }
+.tg .h { font-weight: 600; } .tg .r { color: var(--red); } .tg .d { color: var(--tim); }
+
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 14px; min-width: 0; }
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+.two > * { min-width: 0; }
+
+/* Василий */
+.facts { display: flex; flex-wrap: wrap; gap: 8px; }
+.fact { background: var(--vas-soft); border-radius: 8px; padding: 6px 10px; font-size: 0.85rem; }
+.fact b { color: var(--vas); font-weight: 600; }
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; }
+details + details { margin-top: -10px; }
+summary { cursor: pointer; padding: 14px 18px; font-weight: 600; display: flex; gap: 12px; align-items: baseline; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+"; font-family: var(--f-mono); color: var(--vas); width: 1ch; }
+details[open] summary::before { content: "−"; }
+summary .n { font-family: var(--f-mono); font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+summary .hint { margin-left: auto; font-size: 0.82rem; font-weight: 400; color: var(--muted); text-align: right; }
+.dbody { padding: 0 18px 18px 44px; display: grid; gap: 14px; }
+.dbody ul { font-size: 0.95rem; }
+
+.legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; }
+.task { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; font-size: 0.88rem; display: grid; gap: 4px; color: #18202c; }
+.task .tag { font-size: 0.72rem; font-weight: 700; color: #c62828; text-transform: uppercase; letter-spacing: 0.04em; }
+.task small { color: #5d6676; }
+.task.white { background: #ffffff; }
+.task.pale { background: #fff8d6; }
+.task.yel { background: #ffe17a; }
+.task.redbg { background: #ffb4ad; }
+
+.lifecycle { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 0.85rem; }
+.lifecycle span.s { padding: 4px 10px; border-radius: 6px; color: #18202c; }
+.lifecycle .arrow { font-size: 1rem; }
+
+.sched { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; font-size: 0.78rem; text-align: center; font-variant-numeric: tabular-nums; }
+.sched div { background: var(--vas-soft); border-radius: 6px; padding: 6px 2px; display: grid; gap: 2px; }
+.sched div.off { background: var(--bg); color: var(--muted); }
+.sched b { font-weight: 600; }
+
+.menu { display: grid; gap: 6px; max-width: 360px; }
+.menu span { background: var(--code-bg); border-radius: 8px; padding: 8px 12px; font-size: 0.88rem; text-align: center; }
+
+/* сравнение */
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 0.92rem; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+tr:last-child td { border-bottom: 0; }
+thead th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; background: var(--bg); }
+td:first-child { font-weight: 600; width: 16%; }
+td.t { border-left: 3px solid var(--tim-soft); } td.v { border-left: 3px solid var(--vas-soft); }
+.na { color: var(--muted); font-style: italic; }
+.q { display: inline-block; font-family: var(--f-mono); font-size: 0.75rem; font-weight: 600; color: var(--q); background: var(--q-soft); border-radius: 5px; padding: 1px 7px; white-space: nowrap; }
+
+.same { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.same .card { gap: 6px; }
+.same p { font-size: 0.92rem; color: var(--muted); }
+
+.qlist { display: grid; gap: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; }
+.qrow { display: grid; grid-template-columns: 64px 1fr; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--line); font-size: 0.93rem; }
+.qrow:last-child { border-bottom: 0; }
+.qgroup { padding: 10px 16px; background: var(--bg); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--line); }
+.qgroup:first-child { border-radius: 14px 14px 0 0; }
+
+footer { color: var(--muted); font-size: 0.85rem; }
+
+@media (max-width: 720px) {
+  .duo, .two { grid-template-columns: 1fr; }
+  .kanban { grid-template-columns: 1fr; }
+  .arrow.h { display: none; }
+  summary .hint { display: none; }
+  .dbody { padding-left: 18px; }
+  .sched { font-size: 0.7rem; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+html { scroll-behavior: smooth; }
+</style>
+
+<style>
+.home { font-size: 0.88rem; color: var(--muted); text-decoration: none; }
+.home:hover { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <a class="home" href="./">← ATV Jarvis: брифы и макеты</a>
+  <div class="eyebrow">ATV Jarvis · брифы директоров · по docs/tz.md</div>
+  <h1>Что хотят Тимофей и Василий</h1>
+  <p class="lead">Оба описывают систему, где руководитель ставит задачи, а сотрудники получают их и отчитываются через Telegram. Тимофей описывает короткий сценарий: голос, канбан, напоминания по таймеру и сводка в 18:00. Василий расписал целый регламент Windows-программы «Задачник JarNox» и бота: роли, цвета, одобрения, отчёты, отпуска и корзину.</p>
+  <nav>
+    <a href="#portraits">В двух словах</a>
+    <a href="#timofey">Тимофей</a>
+    <a href="#vasily">Василий</a>
+    <a href="#compare">Где расходятся</a>
+    <a href="#same">Где совпадают</a>
+    <a href="#questions">Открытые вопросы</a>
+  </nav>
+</header>
+
+<section id="portraits">
+  <div class="duo">
+    <article class="portrait tim">
+      <div class="eyebrow">Часть 1 ТЗ</div>
+      <div class="name">Тимофей Юркин</div>
+      <p class="gist">Хочет быстро наговорить задачу и видеть её на доске. Система сама следит за сроками.</p>
+      <ul>
+        <li>Голосом: исполнитель и дедлайн прямо в записи</li>
+        <li>Канбан из трёх колонок: от руководителей, себе, от других</li>
+        <li>Напоминания за 24 ч, 5 ч, 1 ч и 10 мин до срока</li>
+        <li>Сводка каждый день в 18:00, руководителю ещё и по подчинённым</li>
+      </ul>
+      <div class="meta">4 блока требований. Форма продукта не задана.</div>
+    </article>
+    <article class="portrait vas">
+      <div class="eyebrow">Часть 2 ТЗ · договорённости от 2026-10-20</div>
+      <div class="name">Василий Головин</div>
+      <p class="gist">Хочет программу на своём ноутбуке и бота для сотрудников. Каждое решение принимает руководитель.</p>
+      <ul>
+        <li>Windows-приложение, данные локально, бот работает, пока включён ноутбук</li>
+        <li>Карточки сотрудников, цвета и пометки по автору задачи</li>
+        <li>Отчёты текстом и скриншотами, руководитель принимает каждую задачу вручную</li>
+        <li>Напоминания по расписанию 10/14/18, отпуска, передача задач, корзина, копии</li>
+      </ul>
+      <div class="meta">9 разделов правил и 4 вопроса на техническую проработку.</div>
+    </article>
+  </div>
+</section>
+
+<section id="timofey">
+  <div class="sec-head">
+    <span class="who"><span class="dot tim"></span>Тимофей Юркин</span>
+    <h2>Голос, доска, таймер</h2>
+  </div>
+
+  <div class="card">
+    <h3>Постановка задачи голосом</h3>
+    <div class="flow">
+      <div class="step"><b>Записать</b>Голосом, сразу с исполнителем и дедлайном</div>
+      <span class="arrow h">→</span>
+      <div class="step"><b>Распознать</b>Запись превращается в текст</div>
+      <span class="arrow h">→</span>
+      <div class="step"><b>Уточнить</b>Система спрашивает, верно ли поняла, и даёт поправить</div>
+      <span class="arrow h">→</span>
+      <div class="step"><b>Опубликовать</b>Выбор чата, в котором выйдет задача</div>
+    </div>
+  </div>
+
+  <div class="two">
+    <div class="card">
+      <h3>Канбан-доска</h3>
+      <p class="meta">После публикации задача попадает на доску. По брифу это «уже отдельный сервис». Себе задачу можно поставить и без дедлайна.</p>
+      <div class="kanban">
+        <div><h4>Задачи руководителей</h4><div class="kcard">Подготовить КП до 15:00</div></div>
+        <div><h4>Задачи себе</h4><div class="kcard">Разобрать почту · без срока</div></div>
+        <div><h4>Задачи от других</h4><div class="kcard">Сверить счёт от коллеги</div></div>
+      </div>
+      <p class="meta">Карточки на доске придуманы для примера.</p>
+    </div>
+
+    <div class="card">
+      <h3>Напоминания о сроке</h3>
+      <p class="meta">Четыре напоминания до конца срока. Раз есть «за 10 минут», срок указывается с точностью до времени.</p>
+      <div class="timeline">
+        <div class="bar"></div>
+        <div class="ticks">
+          <div class="tick"><i></i>−24 ч</div>
+          <div class="tick"><i></i>−5 ч</div>
+          <div class="tick"><i></i>−1 ч</div>
+          <div class="tick"><i></i>−10 мин</div>
+          <div class="tick end"><i></i>срок</div>
+        </div>
+      </div>
+      <p class="meta">Если задача просрочена и не выполнена, тот, кто её поставил, получает оповещение.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Ежедневная сводка в 18:00</h3>
+    <div class="two">
+      <div class="tg"><span class="h">Просрочено:</span>
+<span class="r">- ..... (срок до 15:00 12.10.26)</span>
+
+<span class="h">Выполнено:</span>
+-
+-
+
+<span class="h">В работе (по срокам):</span>
+<span class="d">15.10.26</span>
+-
+-
+<span class="d">16.10.26</span>
+-
+-
+
+<span class="h">Без дедлайна</span>
+-
+-</div>
+      <div style="display:grid;gap:10px;align-content:start">
+        <p>Формат взят из брифа как есть.</p>
+        <p class="meta">Руководитель сначала получает сводку по своим задачам, затем по задачам, которые он поставил, отдельно по каждому подчинённому.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vasily">
+  <div class="sec-head">
+    <span class="who"><span class="dot vas"></span>Василий Головин</span>
+    <h2>Программа на ноутбуке и бот с регламентом</h2>
+    <p class="lead">Управление идёт из Windows-программы, сотрудники работают только через Telegram-бота. Разделы раскрываются, внутри пункты ТЗ.</p>
+  </div>
+  <div class="facts">
+    <span class="fact"><b>Приложение</b> Задачник JarNox</span>
+    <span class="fact"><b>Бот</b> Задачи отдела продукта</span>
+    <span class="fact"><b>Имя бота</b> @JARNOXproduktTasksBot, не проверено</span>
+    <span class="fact"><b>Сотрудников</b> до 10 на старте</span>
+  </div>
+
+  <details open>
+    <summary><span class="n">§1</span>Установка и работа<span class="hint">локально, в фоне, без пароля</span></summary>
+    <div class="dbody"><ul>
+      <li>Отдельное приложение Windows, русский интерфейс, белый фон. Однократная минимальная установка, ярлык.</li>
+      <li>При автозапуске Windows сразу открываются карточки. Закрытое или свёрнутое окно оставляет программу и бота работать в фоне, значок рядом с часами.</li>
+      <li>Данные хранятся локально на ноутбуке. Бот доступен, только пока ноутбук включён и программа работает. Пароль и PIN не нужны.</li>
+      <li>Изменения сохраняются автоматически, кнопки «Сохранить» нет.</li>
+      <li>До 10 сотрудников на старте, с возможностью расширения.</li>
+      <li>Текст, изображения и голос обрабатываются по возможности локально и бесплатно: модели скачиваются один раз при настройке. Если локально не выйдет, допустимо облако. Модели и расходы пока не выбраны.</li>
+    </ul></div>
+  </details>
+
+  <details>
+    <summary><span class="n">§2</span>Главный экран и карточки<span class="hint">сортировка, «Выполненные», история</span></summary>
+    <div class="dbody"><ul>
+      <li>Первой закреплена карточка «Мои задачи», за ней сотрудники по алфавиту.</li>
+      <li>В карточке ФИО, должность, фото из Telegram и счётчик текущих невыполненных задач. Отдельный счётчик «Будут выданы после возвращения».</li>
+      <li>Задача добавляется только из карточки, кнопкой «Добавить задачу». Общий поиск не нужен.</li>
+      <li>Достаточно текста. Дедлайн и комментарий необязательны. Дедлайн задаётся только датой, просрочка наступает со следующего дня и помечается красным «Просрочено». Если дедлайна нет, бот о сроке ничего не пишет.</li>
+      <li>Руководитель добавляет задачи, правит текст и срок, комментирует, удаляет, передаёт и отмечает выполнение. Сотрудник после создания текст и срок не меняет, только отправляет отчёт.</li>
+      <li>Приоритет ставит только руководитель, пометка «Приоритетная». Одобрение приоритет не ставит.</li>
+      <li>Порядок: сначала приоритетные. Внутри группы задачи со сроком по ближайшему дедлайну, без срока внизу, от старых к новым.</li>
+      <li>Выполненные уходят во вкладку «Выполненные» внутри карточки. Вернуть их в работу нельзя, это и не нужно.</li>
+      <li>История за отдельной иконкой: автор, переносы сроков, комментарии, отчёты, смена исполнителя, дата принятия. Имена сохраняются те, что были на момент действия.</li>
+    </ul></div>
+  </details>
+
+  <details open>
+    <summary><span class="n">§3</span>Авторы, одобрение и оформление<span class="hint">цвета и пометки</span></summary>
+    <div class="dbody">
+      <div class="legend">
+        <div class="task white"><span class="tag">Задача от руководителя</span>Чёрный текст на белом фоне</div>
+        <div class="task pale"><small>Автор: сотрудник</small>Сотрудник себе или коллеге. Бледно-жёлтый фон, автор виден в программе и боте</div>
+        <div class="task white"><span class="tag">Одобрено руководителем</span>Задача сотрудника после галочки. Белый фон, бот сообщает исполнителю</div>
+      </div>
+      <ul>
+        <li>Задачи сотрудника себе и коллеге одобрения не требуют и без него не удаляются. Галочку руководитель ставит по желанию.</li>
+        <li>Задача, которую сотрудник ставит руководителю, требует одобрения:</li>
+      </ul>
+      <div class="lifecycle">
+        <span class="s" style="background:#ffe17a">жёлтый фон</span><span class="arrow">→</span>
+        <span class="meta">3 рабочих дня без решения</span><span class="arrow">→</span>
+        <span class="s" style="background:#ffb4ad">красный фон</span><span class="arrow">→</span>
+        <span class="meta">ещё 3 рабочих дня</span><span class="arrow">→</span>
+        <span class="s" style="background:var(--code-bg);color:var(--ink)">корзина</span>
+      </div>
+      <ul>
+        <li>Явно отклонённую задачу можно оставить с пометкой «Не одобрено». Удаление через 6 рабочих дней от отклонения — необязательный переключатель, затем корзина.</li>
+        <li>Рабочие дни для этих сроков: понедельник–суббота. Исключается только воскресенье, праздники не учитываются.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="n">§4</span>Telegram и подключение<span class="hint">регистрация, меню, голос</span></summary>
+    <div class="dbody">
+      <div class="two">
+        <ul>
+          <li>Бот создаётся с нуля. Руководитель подключается одноразовым кодом из программы.</li>
+          <li>При регистрации сотрудник указывает ФИО, должность, город или регион, часовой пояс и график. По городу программа определяет пояс и группу расписания. Первый запрос руководитель проверяет, правит и одобряет.</li>
+          <li>Профиль и график после регистрации меняет только руководитель.</li>
+          <li>Сотрудник видит только свои задачи. Получателя выбирает по @username, а если его нет — по имени профиля.</li>
+        </ul>
+        <div style="display:grid;gap:8px">
+          <span class="eyebrow">Меню сотрудника</span>
+          <div class="menu">
+            <span>Свои задачи</span>
+            <span>Посмотреть мои задачи</span>
+            <span>Отправить отчёт о выполненных задачах</span>
+            <span>Поставить задачу другому сотруднику</span>
+            <span>Поставить задачу руководителю</span>
+          </div>
+          <span class="meta">Ещё нужны запросы передачи и отсутствия.</span>
+        </div>
+      </div>
+      <ul>
+        <li>Просмотр задач: краткий список, по кнопке подробности, комментарии руководителя и полная история.</li>
+        <li>Перед сохранением новая задача сотрудника показывается автору на проверку и правку. Если в одном сообщении несколько задач, они разделяются автоматически.</li>
+        <li>Задача коллеге создаётся без подтверждения руководителя, получатель сразу получает уведомление. Отказаться он не может.</li>
+        <li>Руководитель в боте выбирает сотрудника или «Мои задачи», затем пишет текст или говорит голосом. Текстовые задачи создаются сразу.</li>
+        <li>Голос доступен только руководителю. Распознанные задачи показываются до создания, каждую можно исправить и подтвердить отдельно.</li>
+        <li>Расплывчатый срок вроде «к концу недели» перед сохранением уточняется до точной даты.</li>
+        <li>Скриншоты принимаются только как отчёт. Проверка отчётов и решения — только в Windows, не в боте.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="n">§5</span>Отчёты и распознавание<span class="hint">«Ожидает проверки», скриншоты, дубли</span></summary>
+    <div class="dbody"><ul>
+      <li>Отчёт присылают текстом или скриншотом, руководитель тоже может загрузить скриншот. Программа сама сопоставляет отчёт с задачами, в том числе с несколькими сразу.</li>
+      <li>Бот подтверждает получение: отчёт ждёт проверки.</li>
+      <li>Отчёт сам задачу не закрывает. Руководитель видит изменения по каждой задаче и подтверждает, исправляет, комментирует или отклоняет.</li>
+      <li>Статус «Ожидает проверки»: задача остаётся текущей и в счётчике, сотруднику о ней не напоминают, руководитель видит её в сводке и во вкладке «На проверку».</li>
+      <li>Отклонение требует комментария с доработками. Бот пересылает его, напоминания возобновляются.</li>
+      <li>Принятая задача, в том числе вручную без отчёта, сразу выполнена. Бот сообщает, что выполнение принято. В боте задача исчезает, в Windows остаётся.</li>
+      <li>Скриншот общего отчёта режется на фрагменты по задачам: главное, чтобы текст читался. Исходник и фрагменты хранятся в истории.</li>
+      <li>Если соответствие неуверенное, программа предлагает варианты. Если не выбран ни один, создаётся новая задача.</li>
+      <li>Повторный отчёт до проверки дополняет прежний, повторы не показываются.</li>
+      <li>Возможный дубль показывается со ссылкой на существующую задачу, без автообъединения. Варианты: дописать комментарием, оставить дубль, удалить, сделать отдельной задачей.</li>
+    </ul></div>
+  </details>
+
+  <details>
+    <summary><span class="n">§6</span>Передача задач и смена сотрудников<span class="hint">архив, замена человека</span></summary>
+    <div class="dbody"><ul>
+      <li>Руководитель передаёт задачу, история и дедлайн сохраняются.</li>
+      <li>Сотрудник может передать свою задачу коллеге только с одобрения руководителя. Причина необязательна. Отказ звучит как «Передача не одобрена руководителем».</li>
+      <li>Передача существующей задачи и новая задача коллеге — разные вещи: новой одобрение не нужно.</li>
+      <li>Исключение сотрудника отключает бота и архивирует карточку. Перед этим все текущие задачи надо передать или удалить.</li>
+      <li>Задача из корзины возвращается прежнему исполнителю, а если он исключён — тому, кого выберет руководитель.</li>
+      <li>Нового человека на ту же должность можно вписать в старую карточку: ФИО и Telegram меняются, старый доступ отключается. Прежнее имя остаётся только в истории.</li>
+      <li>Новичок получает текущие задачи с историей, а выполненные задачи предшественника — ZIP-архивом по кнопке (HTML, без скриншотов).</li>
+    </ul></div>
+  </details>
+
+  <details open>
+    <summary><span class="n">§7</span>Уведомления и напоминания<span class="hint">красная точка, расписание</span></summary>
+    <div class="dbody">
+      <ul>
+        <li>Исполнитель сразу узнаёт о новой задаче, правке текста или срока, комментарии, одобрении, приоритете и принятии выполнения. При удалении или передаче уведомляется прежний исполнитель.</li>
+        <li>На значке программы красная точка. Она гаснет, только когда разобраны все события, требующие решения.</li>
+        <li>Вкладка «На проверку» собирает отчёты, возможные дубли, запросы передачи и отсутствия, изменения дат и новые задачи руководителю.</li>
+        <li>Сотрудникам напоминают обо всех текущих задачах, кроме ожидающих проверки и отложенных. Формат строки: дата постановки, текст, срок или просрочка.</li>
+        <li>Руководитель получает сводку невыполненных задач по сотрудникам и отдельно свои задачи.</li>
+      </ul>
+      <div style="display:grid;gap:8px">
+        <span class="eyebrow">Расписание по умолчанию · у руководителя время томское</span>
+        <div class="sched">
+          <div><b>Пн</b>10 · 14 · 18</div>
+          <div><b>Вт</b>10 · 14 · 18</div>
+          <div><b>Ср</b>10 · 14 · 18</div>
+          <div><b>Чт</b>10 · 14 · 18</div>
+          <div><b>Пт</b>10 · 14 · 18</div>
+          <div><b>Сб</b>12:00</div>
+          <div class="off"><b>Вс</b>нет</div>
+        </div>
+      </div>
+      <ul>
+        <li>У сотрудников местное время и свой график. При 09:00–18:00 получается 10 / 14 / 18. При другом графике: через час после начала, в середине дня и в конце.</li>
+        <li>Расписание настраивается каждому или группе региона. Личная настройка важнее групповой.</li>
+        <li>Если ноутбук пропустил время, при включении уходит одно актуальное напоминание, а не вся очередь.</li>
+        <li>Итоговый дневной отчёт о выполненных задачах не нужен.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details>
+    <summary><span class="n">§8</span>Отпуск и больничный<span class="hint">сдвиг сроков, отложенные задачи</span></summary>
+    <div class="dbody"><ul>
+      <li>Сотрудник запрашивает отсутствие с датами начала и конца включительно, или руководитель оформляет его сам. Действует только после подтверждения.</li>
+      <li>Запрос попадает в «На проверку» и зажигает красную точку. Отклонение требует комментария.</li>
+      <li>По окончании отсутствие закрывается автоматически, сотрудник выходит со следующего рабочего дня.</li>
+      <li>На время отсутствия напоминания останавливаются. Дедлайны сдвигаются на число рабочих дней отсутствия. Срок, который руководитель поставил вручную, не сдвигается.</li>
+      <li>Если задачи отсутствующего переданы другому, им возвращается исходный дедлайн.</li>
+      <li>Автор новой задачи для отсутствующего видит вид отсутствия и дату выхода. Задача становится отложенной и выдаётся после возвращения.</li>
+      <li>Если дедлайн отложенной задачи раньше выхода, автор выбирает другую дату. При продлении отсутствия выдача сдвигается сама.</li>
+      <li>При досрочном выходе отложенные задачи выдаются сразу.</li>
+      <li>В отсутствие сотрудник по-прежнему видит задачи и отправляет отчёты. Задачи себе ставит сразу, и их сроки не сдвигаются.</li>
+    </ul></div>
+  </details>
+
+  <details>
+    <summary><span class="n">§9</span>Хранение, корзина и копии<span class="hint">6 рабочих дней, 30 календарных</span></summary>
+    <div class="dbody"><ul>
+      <li>Любое удаление сначала кладёт задачу в корзину на 6 рабочих дней (пн–сб), потом удаляет окончательно.</li>
+      <li>Выполненные задачи с историей хранятся 30 календарных дней после подтверждения, затем уходят в корзину.</li>
+      <li>Скриншоты хранятся до выполнения и ещё 30 календарных дней после него.</li>
+      <li>При удалении задачи её непроверенный отчёт пропадает из «На проверку», при восстановлении возвращается.</li>
+      <li>Резервная копия создаётся автоматически при первом запуске за день, плюс кнопка «Создать копию сейчас». Копии без скриншотов хранятся 30 дней. Восстанавливать из них не нужно, достаточно читаемых данных.</li>
+    </ul></div>
+  </details>
+</section>
+
+<section id="compare">
+  <div class="sec-head">
+    <div class="eyebrow">Бок о бок</div>
+    <h2>Где брифы расходятся</h2>
+    <p class="lead">Фиолетовые метки — номера открытых вопросов из docs/questions.md.</p>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Тема</th><th><span class="who"><span class="dot tim"></span>Тимофей</span></th><th><span class="who"><span class="dot vas"></span>Василий</span></th><th>Вопрос</th></tr></thead>
+      <tbody>
+        <tr><td>Форма продукта</td><td class="t na">Не задана. Канбан «уже отдельный сервис»</td><td class="v">Windows-приложение + Telegram-бот</td><td><span class="q">Q-001</span> <span class="q">Q-004</span></td></tr>
+        <tr><td>Где данные</td><td class="t na">Не сказано</td><td class="v">Локально на ноутбуке. Ноутбук выключен — бот не работает</td><td><span class="q">Q-002</span></td></tr>
+        <tr><td>Дедлайн</td><td class="t">С временем: «до 15:00 12.10.26»</td><td class="v">Только дата, просрочка со следующего дня</td><td><span class="q">Q-007</span></td></tr>
+        <tr><td>Напоминания</td><td class="t">От срока: за 24 ч, 5 ч, 1 ч, 10 мин</td><td class="v">По расписанию: 10/14/18, сб 12:00, о всех текущих задачах</td><td><span class="q">Q-008</span></td></tr>
+        <tr><td>Сводка</td><td class="t">В 18:00, есть блок «Выполнено»</td><td class="v">Сводка невыполненных. Отчёт о выполненных не нужен</td><td><span class="q">Q-009</span></td></tr>
+        <tr><td>Куда уходит задача</td><td class="t">В выбранный чат, затем на доску</td><td class="v">В личного бота исполнителя</td><td><span class="q">Q-010</span></td></tr>
+        <tr><td>Как сгруппированы</td><td class="t">Колонки канбана: от руководителей / себе / от других</td><td class="v">Карточка на каждого сотрудника, цвет и пометка по автору</td><td><span class="q">Q-011</span></td></tr>
+        <tr><td>Кто говорит голосом</td><td class="t">Ограничений нет</td><td class="v">Только руководитель</td><td><span class="q">Q-012</span></td></tr>
+        <tr><td>Распознавание</td><td class="t na">Не сказано</td><td class="v">Желательно локально и бесплатно, облако допустимо</td><td><span class="q">Q-003</span></td></tr>
+        <tr><td>Глубина проработки</td><td class="t">Ключевые сценарии</td><td class="v">Регламент: одобрения, отчёты, отпуска, корзина, копии</td><td><span class="q">Q-006</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="same">
+  <div class="sec-head">
+    <div class="eyebrow">Общая основа</div>
+    <h2>Где они совпадают</h2>
+  </div>
+  <div class="same">
+    <div class="card"><h3>Telegram как канал</h3><p>У обоих задачи доходят до людей через Telegram.</p></div>
+    <div class="card"><h3>Голос с проверкой</h3><p>Задачу можно наговорить, но сначала система показывает, как поняла, и даёт поправить.</p></div>
+    <div class="card"><h3>Задачи себе</h3><p>Человек ставит задачи сам себе, можно без дедлайна.</p></div>
+    <div class="card"><h3>Контроль сроков</h3><p>Просрочка заметна: красная пометка у Василия, оповещение автору у Тимофея.</p></div>
+    <div class="card"><h3>Сводка руководителю</h3><p>Руководитель видит свои задачи и отдельно задачи подчинённых по каждому.</p></div>
+    <div class="card"><h3>Три источника задач</h3><p>От руководителя, себе и от коллег. У Тимофея это колонки, у Василия цвета и пометки.</p></div>
+  </div>
+</section>
+
+<section id="questions">
+  <div class="sec-head">
+    <div class="eyebrow">docs/questions.md · все открыты</div>
+    <h2>Открытые вопросы</h2>
+  </div>
+  <div class="qlist">
+    <div class="qgroup">Форма продукта и инфраструктура</div>
+    <div class="qrow"><span class="q">Q-001</span><span>Форма продукта: десктоп, веб, только бот или комбинация?</span></div>
+    <div class="qrow"><span class="q">Q-002</span><span>Данные локально на ноутбуке руководителя или на сервере?</span></div>
+    <div class="qrow"><span class="q">Q-003</span><span>Распознавание голоса, текста и скриншотов: локальные модели или облако? Требования к ноутбуку, бюджет.</span></div>
+    <div class="qrow"><span class="q">Q-004</span><span>Канбан: внешний сервис или собственные карточки?</span></div>
+    <div class="qrow"><span class="q">Q-005</span><span>Когда делать ежедневную копию, если программа не перезапускается?</span></div>
+    <div class="qgroup">Расхождения между брифами</div>
+    <div class="qrow"><span class="q">Q-006</span><span>Чьё видение главное: одна система, две версии одной идеи или разные отделы?</span></div>
+    <div class="qrow"><span class="q">Q-007</span><span>Дедлайн с временем или только дата?</span></div>
+    <div class="qrow"><span class="q">Q-008</span><span>Напоминания от срока, по расписанию или оба механизма?</span></div>
+    <div class="qrow"><span class="q">Q-009</span><span>Нужен ли в сводке блок «Выполнено»?</span></div>
+    <div class="qrow"><span class="q">Q-010</span><span>Публикация в выбранный чат или в личного бота? Нужны ли групповые чаты?</span></div>
+    <div class="qrow"><span class="q">Q-011</span><span>Колонки канбана или карточки сотрудников с цветами?</span></div>
+    <div class="qrow"><span class="q">Q-012</span><span>Голосом ставит только руководитель или любой?</span></div>
+    <div class="qgroup">Уточнения по правилам</div>
+    <div class="qrow"><span class="q">Q-013</span><span>Влияет ли отсутствие автора на отсчёт до удаления неодобренной задачи руководителю?</span></div>
+    <div class="qrow"><span class="q">Q-014</span><span>Продлевать ли новичку доступ к архиву предшественника сверх 30 дней?</span></div>
+  </div>
+</section>
+
+<footer>Собрано 2026-10-27 из docs/tz.md и docs/questions.md. Пункты брифов пересказаны короче, смысл не менялся. Полные формулировки — в tz.md.</footer>
+
+</div>
+</body>
+</html>
