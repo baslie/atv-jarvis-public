@@ -57,7 +57,7 @@ button{font-family:inherit}
       <section aria-label="Сотрудники" style="display: flex; flex-direction: column; gap: 14px;">
         <div style="display: flex; justify-content: space-between; align-items: baseline;">
           <h2 style="margin: 0; font-size: 18px;">Люди и задачи</h2>
-          <span style="font-size: 13px; color: #5A6372;">по отделам, внутри — по алфавиту</span>
+          <span style="display: inline-flex; border: 1px solid #DDE1E7; border-radius: 8px; overflow: hidden; font-size: 13px;"><span style="padding: 4px 10px; background: #161B22; color: #FFFFFF;">Список</span><span style="padding: 4px 10px; color: #5A6372;" title="Люди по подчинённости, как на схеме структуры компании (ADR-0009)">Схема</span></span>
         </div>
 
         <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
@@ -102,9 +102,9 @@ button{font-family:inherit}
     <aside aria-label="На проверку" style="flex: 1 1 300px; min-width: 0; background: #FFFFFF; border: 1px solid #DDE1E7; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 12px; align-self: flex-start;">
       <div style="display: flex; justify-content: space-between; align-items: baseline;"><h2 style="margin: 0; font-size: 17px;">На проверку</h2><span style="font-size: 13px; color: #5A6372;">5 решений</span></div>
       <div style="border: 1px solid #DDE1E7; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 4px; font-size: 14px;">
-        <span style="font-size: 12px; color: #5A6372;">Отчёт · скриншот</span>
-        <b>Ирина: отчёт сразу по 3 задачам</b>
-        <span style="color: #5A6372;">2 сопоставлены уверенно, 1 — выбрать вручную</span>
+        <span style="font-size: 12px; color: #5A6372;">Выполнено · ждёт подтверждения</span>
+        <b>Ирина отметила 3 задачи выполненными</b>
+        <span style="color: #5A6372;">к одной приложен скриншот, к двум — комментарии</span>
       </div>
       <div style="border: 1px solid #DDE1E7; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 4px; font-size: 14px; background: #FFF6CC;">
         <span style="font-size: 12px; color: #8A5A00;">Запрос руководителю · 2-й рабочий день</span>
