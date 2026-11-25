@@ -1,1 +1,0 @@
-import{t as e}from"./DraftsPage-DGnrDp5P.js";var t=e;export{t as component};

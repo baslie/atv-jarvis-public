@@ -1,0 +1,1 @@
+import{i as e,r as t}from"./page-BT-DynKG.js";import{n}from"./dist-DtaLJkgA.js";var r=n();function i({title:n,children:i}){return(0,r.jsxs)(t,{size:`narrow`,children:[(0,r.jsx)(e,{title:n,description:`Экран появится на следующем шаге прототипа`}),i]})}export{i as t};

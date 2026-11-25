@@ -1,1 +1,0 @@
-import{t as e}from"./StubPage-DWVR07Oi.js";import{t}from"./jsx-runtime-EIAPxkjE.js";var n=t(),r=()=>(0,n.jsx)(e,{title:`Выполненные`});export{r as component};
