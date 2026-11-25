@@ -1,0 +1,1 @@
+import{t as e}from"./StubPage-BDV8wzcJ.js";import{a as t}from"./dist-DMYUwqNN.js";var n=t(),r=()=>(0,n.jsx)(e,{title:`Выполненные`});export{r as component};

@@ -1,1 +1,0 @@
-import{t as e}from"./DraftsPage-CIEON9CQ.js";var t=e;export{t as component};
